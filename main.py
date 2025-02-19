@@ -7,14 +7,15 @@ import subprocess
 
 
 
-# start'ssparse the arguments given in action="store_true"ne.
+# Parse the arguments given.
 parser = argparse.ArgumentParser(description="pydep.")
 parser.add_argument("--path", "-p", type=str, help="Path of your Pipfile.")
-parser.add_argument("--list", "-l", action="store_true", help="List all packages.")
-parser.add_argument("--versionof", "-vo", type=str, help="Version of the specified package.")
-parser.add_argument("--add","-a", type=str, help="Name of the package to install.")
-parser.add_argument("--update-all","-ua", action="store_true", help="Name of the package to update to the last version.")
-parser.add_argument("--remove","-r", type=str, help="Name of the package to uninstall.")
+group = parser.add_mutually_exclusive_group(required=True)
+group.add_argument("--list", "-l", action="store_true", help="List all packages.")
+group.add_argument("--versionof", "-vo", type=str, help="Version of the specified package.")
+group.add_argument("--add","-a", type=str, help="Name of the package to install.")
+group.add_argument("--update-all","-ua", action="store_true", help="Name of the package to update to the last version.")
+group.add_argument("--remove","-r", type=str, help="Name of the package to uninstall.")
 
 args = parser.parse_args() # Stores the args given as booleans.
 
@@ -60,6 +61,7 @@ try:
   elif args.add:
     subprocess.run(args=["pipenv", "install", args.add], cwd=args.path)
   
+  # Update all packages to last stabel version.
   elif args.update_all:
     subprocess.run(args=["pipenv", "update"], cwd=args.path, check=True)
 
