@@ -94,9 +94,11 @@ try:
     elif args.remove:
         subprocess.run(args=["pipenv", "uninstall", args.remove], cwd=args.path)
 
+    # Check if all package's versions are up to date.
     elif args.check_outdated:
         subprocess.run(args=["pipenv", "update", "--outdated"], cwd=args.path)
 
+    # Show the package's tree.
     elif args.graph:
         subprocess.run(args=["pipenv", "graph"], cwd=args.path)
 

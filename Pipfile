@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 toml = "==0.10.2"
 pandas = "*"
-pytest = "==8.3.2"
+pytest = "==8.3.4"
 
 [dev-packages]
 
